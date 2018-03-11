@@ -1,16 +1,16 @@
 from bottle import get, run, post, request, response, route
 import os
-from dash_tools.dashd import *
+from dash_tools import dashd
 
 @get('/get_votes')
 def get_votes():
-    package = get_votes()
+    package = dashd.get_votes()
     response.content_type = 'application/json'
     return package
 
 @route('/get_proposals')
 def get_proposals():
-    package = get_proposals()
+    package = dashd.get_proposals()
     response.content_type = 'application/json'
     return dict(data=package)
 
