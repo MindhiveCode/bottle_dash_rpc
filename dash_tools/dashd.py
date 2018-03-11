@@ -63,7 +63,7 @@ def run_dash_cli_command(cmd):
 def get_proposals():
     proposals = json.loads(run_dash_cli_command('gobject list all'))
 
-    print proposals
+    print (proposals)
     print(len(proposals))
 
     return proposals
