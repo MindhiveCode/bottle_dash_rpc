@@ -2,8 +2,12 @@ from bottle import get, run, post, request, response, route
 import os
 import sys
 
-sys.path.append('dash_tools')
-import dashd
+if sys.version > 3:
+    sys.path.append('dash_tools')
+    import dashd
+
+else:
+    from dash_tools import dashd
 
 @route('/api/get_latest_all')
 def get_votes():
