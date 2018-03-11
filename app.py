@@ -2,7 +2,7 @@ from bottle import get, run, post, request, response, route
 import os
 import sys
 
-if sys.version > 3:
+if sys.version_info[0] < 3:
     sys.path.append('dash_tools')
     import dashd
 

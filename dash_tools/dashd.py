@@ -10,38 +10,11 @@ import time
 import sys
 import re
 
-import dashlib
+if sys.version_info[0] < 3:
+    import dashd
 
-sys.setrecursionlimit(1000)
-
-"""
-urnd = random.SystemRandom()
-
-
-def urandom_int():
-    urandom = map(ord, os.urandom(4))
-    offset = 0
-    for d in range(4):
-        offset += pow(urandom[d], 2**d)
-    return offset
-
-
-def random_offset(size):
-    bigint = urandom_int()
-    offset_range = bigint % size
-    return offset_range - (size/2)
-
-
-def random_timestamp():
-    now_epoch = int(time.time())
-    urandom = map(ord, os.urandom(4))
-    offset = 0
-    for d in range(4):
-        offset += pow(urandom[d], 2**d)
-    return now_epoch - (offset % 86400)
-
-"""
-
+else:
+    pass
 
 # python <2.7 monkey patch
 if "check_output" not in dir( subprocess ):
