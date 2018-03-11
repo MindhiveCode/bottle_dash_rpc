@@ -5,11 +5,7 @@ from dash_tools.dashd import *
 @route('/get_votes', method="post")
 def get_votes():
     proposal_hash = request.forms.get("text")
-
-
-
-
-    package = {"response_type": "in_channel", "text": "{}".format(output_path)}
+    package = get_votes()
     response.content_type = 'application/json'
     return package
 
