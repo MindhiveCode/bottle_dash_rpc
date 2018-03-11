@@ -98,6 +98,7 @@ def get_votes():
             ballots[entry][go_type] = go_data
 
         except AttributeError:
+            go_data = {}
             print("Ran into the error we expected. No surprises here.")
             go_type = 'funding'
             go_data["type"] = 1
