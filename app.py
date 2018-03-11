@@ -4,7 +4,7 @@ from dash_tools.dashd import *
 
 @get('/get_votes')
 def get_votes():
-    package = json.dumps(get_votes())
+    package = get_votes()
     response.content_type = 'application/json'
     return package
 
