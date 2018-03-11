@@ -8,11 +8,11 @@ def get_votes():
     response.content_type = 'application/json'
     return package
 
-@get('/get_proposals')
+@route('/get_proposals')
 def get_proposals():
     package = get_proposals()
     response.content_type = 'application/json'
-    return package
+    return dict(data=package)
 
 
 if __name__ == '__main__':
