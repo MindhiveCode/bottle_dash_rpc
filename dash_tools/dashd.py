@@ -68,7 +68,7 @@ def run_dash_cli_command(cmd):
 
 def get_proposals():
     proposals = json.loads(run_dash_cli_command('gobject list all').decode('utf-8'))
-    return proposals
+    return dict(data=proposals)
 
 
 def get_votes():
