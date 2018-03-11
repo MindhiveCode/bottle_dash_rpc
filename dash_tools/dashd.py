@@ -57,11 +57,13 @@ if "check_output" not in dir( subprocess ):
 
 
 def run_command(cmd):
-    return subprocess.check_output(cmd, shell=True)
+    return subprocess.check_output(cmd, shell=False)
 
 
 def run_dash_cli_command(cmd):
-    return run_command("%s %s" % ('dash-cli', cmd))
+    output = run_command("%s %s" % ('dash-cli', cmd))
+    print(output)
+    return output
 
 def get_proposals():
     proposals = run_dash_cli_command('gobject list all')
