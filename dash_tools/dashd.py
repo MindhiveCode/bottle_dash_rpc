@@ -8,6 +8,9 @@ import subprocess
 import time
 # import pdb
 import sys
+import re
+
+import dashlib
 
 sys.setrecursionlimit(1000)
 
@@ -39,6 +42,7 @@ def random_timestamp():
 
 """
 
+
 # python <2.7 monkey patch
 if "check_output" not in dir( subprocess ):
     def f(*popenargs, **kwargs):
@@ -69,6 +73,22 @@ def run_dash_cli_command(cmd):
 def get_proposals():
     proposals = json.loads(run_dash_cli_command('gobject list all').decode('utf-8'))
     return proposals
+
+
+def get_ballot(proposal_hash):
+    vote_info = {}
+
+    try:
+        vote_data = json.loads(run_dash_cli_command('gobject getvotes %s' % proposal_hash))
+        vote_info['votes'] = dashlib.parse_raw_votes(vote_data)
+        vote_info['hash'] = proposal_hash
+
+        return vote_info
+
+    except Exception as e:
+        print(e)
+        return ''
+
 
 def get_votes():
     global max_percentage_len
@@ -153,7 +173,3 @@ def get_votes():
     ballot_entries = sorted(ballot, key=lambda s: ballot[s]['votes_needed'], reverse=False)
 
     return ballots
-
-if __name__ == '__main__':
-    get_votes()
-    #pdb.set_trace()
