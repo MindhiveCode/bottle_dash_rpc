@@ -9,7 +9,7 @@ import time
 import pdb
 import sys
 
-sys.setrecursionlimit(20000)
+sys.setrecursionlimit(1000)
 
 """
 urnd = random.SystemRandom()
@@ -57,7 +57,7 @@ if "check_output" not in dir( subprocess ):
 
 
 def run_command(cmd):
-    return subprocess.check_output(cmd, shell=False)
+    return subprocess.check_output(cmd, shell=True)
 
 
 def run_dash_cli_command(cmd):
@@ -153,5 +153,4 @@ def get_votes():
     return ballot_entries
 
 if __name__ == '__main__':
-    get_votes()
     pdb.set_trace()
