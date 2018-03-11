@@ -90,12 +90,16 @@ def get_votes():
     ballot = {}
 
     for entry in ballots:
+        try:
+            # unescape data string
+            ballots[entry]['_data'] = json.loads(ballots[entry][u'DataHex'].decode("hex"))
 
-        # unescape data string
-        ballots[entry]['_data'] = json.loads(ballots[entry][u'DataHex'].decode("hex"))
+            (go_type, go_data) = ballots[entry]['_data'][0]
+            ballots[entry][go_type] = go_data
 
-        (go_type, go_data) = ballots[entry]['_data'][0]
-        ballots[entry][go_type] = go_data
+        except AttributeError:
+            print("Ran into the error we expected. No surprises here.")
+            ballots[entry][go_type] = 1
 
         if str(go_type) == 'watchdog':
             continue
