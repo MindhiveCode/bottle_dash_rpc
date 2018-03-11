@@ -11,10 +11,10 @@ import sys
 import re
 
 if sys.version_info[0] < 3:
-    import dashd
+    import dashlib
 
 else:
-    pass
+    from dash_tools import dashlib
 
 # python <2.7 monkey patch
 if "check_output" not in dir( subprocess ):
