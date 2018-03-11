@@ -2,9 +2,8 @@ from bottle import run, post, request, response, route
 import os
 from dash_tools.dashd import *
 
-@route('/get_votes', method="post")
+@get('/get_votes')
 def get_votes():
-    proposal_hash = request.forms.get("text")
     package = get_votes()
     response.content_type = 'application/json'
     return package
