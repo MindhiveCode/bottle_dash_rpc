@@ -63,7 +63,7 @@ def get_ballot(proposal_hash):
         return ''
 
 
-def get_votes():
+def get_everything():
     global max_percentage_len
     global max_needed_len
     global days_to_finalization

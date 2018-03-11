@@ -13,7 +13,7 @@ else:
 
 @route('/api/get_latest_all')
 def get_votes():
-    package = dashd.get_votes()
+    package = dashd.get_everything()
     response.content_type = 'application/json'
     return dict(data=package)
 
