@@ -99,7 +99,8 @@ def get_votes():
 
         except AttributeError:
             print("Ran into the error we expected. No surprises here.")
-            ballots[entry][go_type] = 1
+            go_type = funding
+            go_data["type"] = 1
 
         if str(go_type) == 'watchdog':
             continue
@@ -117,7 +118,10 @@ def get_votes():
             continue
 
         ballots[entry][u'vote'] = 'SKIP'
-        ballots[entry][u'votes'] = json.loads(run_dash_cli_command('gobject getvotes %s' % entry))
+        try:
+            ballots[entry][u'votes'] = json.loads(run_dash_cli_command('gobject getvotes %s' % entry))
+        except KeyError:
+            print("Tried checking for votes on an object that doesn't have them.")
 
         ballot[entry] = ballots[entry]
 
