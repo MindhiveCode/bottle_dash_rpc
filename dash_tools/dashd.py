@@ -6,7 +6,7 @@ import os
 import random
 import subprocess
 import time
-import pdb
+# import pdb
 import sys
 
 sys.setrecursionlimit(1000)
@@ -62,7 +62,7 @@ def run_command(cmd):
 
 def run_dash_cli_command(cmd):
     output = run_command("%s %s" % ('dash-cli', cmd))
-    print(output)
+    #print(output)
     return output
 
 
@@ -84,24 +84,20 @@ def get_votes():
     days_to_next_cycle = blocks_to_next_cycle / 576.0
     days_to_finalization = days_to_next_cycle - 3
 
+    ballot = {}
 
     # get ballot
     ballots = json.loads(run_dash_cli_command('gobject list all'))
-    ballot = {}
+
 
     for entry in ballots:
-        try:
-            # unescape data string
-            ballots[entry]['_data'] = json.loads(ballots[entry][u'DataHex'].decode("hex"))
 
-            (go_type, go_data) = ballots[entry]['_data'][0]
-            ballots[entry][go_type] = go_data
+        # unescape data string
+        ballots[entry]['_data'] = json.loads(ballots[entry][u'DataHex'].decode("hex"))[0]
 
-        except AttributeError:
-            go_data = {}
-            print("Ran into the error we expected. No surprises here.")
-            go_type = 'funding'
-            go_data["type"] = 1
+        (go_type, go_data) = ballots[entry]['_data']
+        ballots[entry][go_type] = go_data
+
 
         if str(go_type) == 'watchdog':
             continue
@@ -119,10 +115,7 @@ def get_votes():
             continue
 
         ballots[entry][u'vote'] = 'SKIP'
-        try:
-            ballots[entry][u'votes'] = json.loads(run_dash_cli_command('gobject getvotes %s' % entry))
-        except KeyError:
-            print("Tried checking for votes on an object that doesn't have them.")
+        ballots[entry][u'votes'] = json.loads(run_dash_cli_command('gobject getvotes %s' % entry))
 
         ballot[entry] = ballots[entry]
 
@@ -159,7 +152,8 @@ def get_votes():
 
     ballot_entries = sorted(ballot, key=lambda s: ballot[s]['votes_needed'], reverse=False)
 
-    return ballot_entries
+    return ballots
 
 if __name__ == '__main__':
-    pdb.set_trace()
+    get_votes()
+    #pdb.set_trace()

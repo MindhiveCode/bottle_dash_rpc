@@ -1,12 +1,15 @@
 from bottle import get, run, post, request, response, route
 import os
-from dash_tools import dashd
+import sys
 
-@get('/get_votes')
+sys.path.append('dash_tools')
+import dashd
+
+@route('/get_votes')
 def get_votes():
     package = dashd.get_votes()
     response.content_type = 'application/json'
-    return package
+    return dict(data=package)
 
 @route('/get_proposals')
 def get_proposals():
