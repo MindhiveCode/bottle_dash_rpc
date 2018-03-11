@@ -99,7 +99,7 @@ def get_votes():
 
         except AttributeError:
             print("Ran into the error we expected. No surprises here.")
-            go_type = funding
+            go_type = 'funding'
             go_data["type"] = 1
 
         if str(go_type) == 'watchdog':
