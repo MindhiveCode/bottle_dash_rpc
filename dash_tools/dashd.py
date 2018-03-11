@@ -60,6 +60,12 @@ def run_command(cmd):
 def run_dash_cli_command(cmd):
     return run_command("%s %s" % ('dash-cli', cmd))
 
+def get_proposals():
+    proposals = json.loads(run_dash_cli_command('gobject list all'))
+
+    return proposals
+
+
 
 def get_votes():
     global max_percentage_len
