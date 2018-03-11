@@ -7,6 +7,9 @@ import random
 import subprocess
 import time
 import pdb
+import sys
+
+sys.setrecursionlimit(10000)
 
 """
 urnd = random.SystemRandom()
