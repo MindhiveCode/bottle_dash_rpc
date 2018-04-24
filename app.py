@@ -4,7 +4,7 @@ import sys
 
 
 if sys.version_info[0] < 3:
-    sys.path.append('dash_tools')
+    sys.path.append(os.path.join(os.path.dirname(__file__), './dash_tools'))
     import dashd
 
 else:
