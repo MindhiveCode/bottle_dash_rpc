@@ -31,6 +31,12 @@ def get_votes_for_hash():
     vote_info = dashd.get_ballot(prop_hash)
     return vote_info
 
+@route('/api/masternode_list')
+def get_masternode_list():
+    package = dashd.get_masternodes()
+    response.content_type = 'application/json'
+    return dict(data=package)
+
 
 if __name__ == '__main__':
     port_config = int(os.getenv('PORT', 5000))

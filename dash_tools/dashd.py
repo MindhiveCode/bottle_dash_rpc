@@ -146,3 +146,8 @@ def get_everything():
     ballot_entries = sorted(ballot, key=lambda s: ballot[s]['votes_needed'], reverse=False)
 
     return ballots
+
+
+def get_masternodes():
+    masternodes = json.loads(run_dash_cli_command('masternodelist').decode('utf-8'))
+    return masternodes
